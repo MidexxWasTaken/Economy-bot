@@ -1,7 +1,9 @@
 const db = require ('quick.db')
 module.exports = {
-    name: 'test',
+    name: 'balance',
     async execute (client, message, args) {
-        channel.message.send(await db.get(`${guild.id}_${member.id}_wallet`));
+        const { guild, member } = message;
+        const balance = await db.get(`${guild.id}_${member.id}_wallet`);
+        message.channel.send({ content: `You have $${balance} in your wallet!` });
     }
 }
